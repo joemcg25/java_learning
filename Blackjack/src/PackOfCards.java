@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /*
@@ -14,6 +15,7 @@ import java.util.Random;
  */
 public class PackOfCards {
     private ArrayList<String> drawnCards;
+    //private HashMap<String,ArrayList<String>> cards;
     private final ArrayList<String> cards;
     private ArrayList<String> cardsLeft;
     private final String[] crdTypes;
@@ -42,7 +44,7 @@ public class PackOfCards {
                 res.add(join(x,i,"_"));
             }
         }
-        //Best to store as a dict
+        //Best to store as a dict(HASH MAP)
         return res;
     }
     public ArrayList<String> cards(){
