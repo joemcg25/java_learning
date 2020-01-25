@@ -16,7 +16,10 @@ public class Blackjack {
     private final String[] usrCmds;
     private int usrScore;
     private int dlrScore;
+    private BlackJackView item;
+    private String res;
     public Blackjack(boolean acesHigh){
+      this.res="Start";
       this.cards=new PackOfCards();
       this.dealer=new userInput();
       this.rndmLogic=new RandomGen();
@@ -24,6 +27,7 @@ public class Blackjack {
       this.usrScore=0;
       this.dlrScore=0;
       this.acesHigh=acesHigh;
+      this.item=new BlackJackView();
       cards.shuffleDeck();
     }
     //"Jack","Queen","King","Ace"
@@ -78,11 +82,26 @@ public class Blackjack {
             System.out.println(i);
         }
     }
-    public void startGame(){
+    public void provideMove(String res){
+        this.res=res;
+    }
+    private String getProvideMove(){
+        return this.res;
+    }
+    public void startGame(boolean write){
         System.out.println("You are starting a game");
         prntCmds();
+        if(!write){
+            item.run();
+        }
+            //Export this logic to a separate function
         while(true){
-            String res=dealer.returnString("Please enter your command");
+            String res=null;
+            if(write){
+                res=dealer.returnString("Please enter your command");
+            }else{
+                res=getProvideMove();
+            }
             if(res.equals("quit")){
                 System.out.println("The game will now finish");
                 break;

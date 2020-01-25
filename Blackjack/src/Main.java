@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args){
         System.out.println("Blackjack game ");
         Blackjack blackjack=new Blackjack(true);
-        blackjack.startGame();
+        blackjack.startGame(true);
+        //BlackJackView item=new BlackJackView();
+        //item.run();
     }
 }
