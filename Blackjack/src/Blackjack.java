@@ -80,62 +80,18 @@ public class Blackjack {
             System.out.println(i);
         }
     }
-    public void startGame(boolean write){
+    public void startGame(){
         System.out.println("You are starting a game");
         prntCmds();
-        if(!write){
-            item.run();
-        }
-            //Export this logic to a separate function
         while(true){
             String res="";
-            if(write){
-                res=dealer.returnString("Please enter your command");
-            }
+            res=dealer.returnString("Please enter your command");
             if(res.equals("quit")){
                 System.out.println("The game will now finish");
                 break;
-            }else if(res.equals("start")){
-                reset();
-                makeMove(2,false);
-            }else if(res.equals("reset")){
-                System.out.println("The game will now reset");
-                reset();
-            }else if(res.equals("hit")){
-                System.out.println("You have selected hit on "+retScore(false));
-                makeMove(1,false);
-                System.out.println("Your score now is "+retScore(false));
-                if(retScore(false)>21){
-                    System.out.println("Bust!");
-                    reset();
-                }
-            }else if(res.equals("stand")){
-                System.out.println("You have selected to stand on "+retScore(false));
-                makeMove(2,true);
-                while(dlrLgc(retScore(true))){
-                  makeMove(1,true);
-                }
-                System.out.println("Final Dealer score is "+retScore(true));
-                if((retScore(true)>retScore(false))&&(retScore(true)<21)){
-                    System.out.println("Dealer wins!!");
-                    printScrs();
-                }else if(retScore(true)==retScore(false)){
-                    System.out.println("Tie game!!");
-                    printScrs();                    
-                }else {
-                    System.out.println("You win!!");
-                    printScrs();
-                }
-                reset();
-            }else if(res.equals("split")){
-                //add in split logic here
-            }else if(res.equals("double")){
-                //add in double logic here
             }else{
-                System.out.println("Unknown Command: "+res);
-                System.out.println("Known Commands are: ");
-                prntCmds();
-            }           
+                game(res);
+            }
         }
     }
     public boolean dlrLgc(int crrScr){
@@ -156,7 +112,6 @@ public class Blackjack {
         System.out.println("Dealer final score "+ retScore(true));
         System.out.println("Your final score "+ retScore(false));
     }
-    //private 
     ///Option to have Ace be 11 or 1/11
     //Dealer interface - 
     public void game(String move){
@@ -193,6 +148,10 @@ public class Blackjack {
                     printScrs();
                 }
                 reset();
+            }else{
+                System.out.println("Unknown Command: "+move);
+                System.out.println("Known Commands are: ");
+                prntCmds();
             }
     }
     
