@@ -17,9 +17,7 @@ public class Blackjack {
     private int usrScore;
     private int dlrScore;
     private BlackJackView item;
-    private String res;
     public Blackjack(boolean acesHigh){
-      this.res="Start";
       this.cards=new PackOfCards();
       this.dealer=new userInput();
       this.rndmLogic=new RandomGen();
@@ -82,12 +80,6 @@ public class Blackjack {
             System.out.println(i);
         }
     }
-    public void provideMove(String res){
-        this.res=res;
-    }
-    private String getProvideMove(){
-        return this.res;
-    }
     public void startGame(boolean write){
         System.out.println("You are starting a game");
         prntCmds();
@@ -96,11 +88,9 @@ public class Blackjack {
         }
             //Export this logic to a separate function
         while(true){
-            String res=null;
+            String res="";
             if(write){
                 res=dealer.returnString("Please enter your command");
-            }else{
-                res=getProvideMove();
             }
             if(res.equals("quit")){
                 System.out.println("The game will now finish");
@@ -169,6 +159,41 @@ public class Blackjack {
     //private 
     ///Option to have Ace be 11 or 1/11
     //Dealer interface - 
-
+    public void game(String move){
+        move=move.toLowerCase();
+            if(move.equals("start")){
+                reset();
+                makeMove(2,false);
+            }else if(move.equals("reset")){
+                System.out.println("The game will now reset");
+                reset();
+            }else if(move.equals("hit")){
+                System.out.println("You have selected hit on "+retScore(false));
+                makeMove(1,false);
+                System.out.println("Your score now is "+retScore(false));
+                if(retScore(false)>21){
+                    System.out.println("Bust!");
+                    reset();
+                }
+            }else if(move.equals("stand")){
+                System.out.println("You have selected to stand on "+retScore(false));
+                makeMove(2,true);
+                while(dlrLgc(retScore(true))){
+                  makeMove(1,true);
+                }
+                System.out.println("Final Dealer score is "+retScore(true));
+                if((retScore(true)>retScore(false))&&(retScore(true)<21)){
+                    System.out.println("Dealer wins!!");
+                    printScrs();
+                }else if(retScore(true)==retScore(false)){
+                    System.out.println("Tie game!!");
+                    printScrs();                    
+                }else {
+                    System.out.println("You win!!");
+                    printScrs();
+                }
+                reset();
+            }
+    }
     
 }

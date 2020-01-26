@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -41,15 +42,17 @@ public class BlackJackView implements Runnable {
     }
     
     private void createComponents(Container container) {
-        GridLayout layout=new GridLayout(3, 3);
+        GridLayout layout=new GridLayout(4, 3);
         Blackjack log=new Blackjack(true);
-        JTextField display=new JTextField("Dealer Score");
+        //Store all objects in a single Map object to reduce Globals ? //
+        JLabel displayTop=new JLabel();
+        displayTop.setText("Welcome to the BlackJack Table");
+        JLabel display=new JLabel("Dealer Score");
         JTextField display1=new JTextField("0");
-        display.setEnabled(false);
         JPanel panel=createPanelObj(1,2);
         panel.add(display);
         panel.add(display1);
-        JTextField txtFld=new JTextField("User Score");
+        JLabel txtFld=new JLabel("User Score");
         JTextField txtFld1=new JTextField("0");
         JPanel panel1=createPanelObj(1,2);
         panel1.add(txtFld);
@@ -77,8 +80,8 @@ public class BlackJackView implements Runnable {
         gameCls.retPanel().add(but4);
         gameCls.retPanel().add(but5);
         gameCls.retPanel().add(but6);
-        //actCls.setButValue(panel, 2, false);
         container.setLayout(layout);
+        container.add(displayTop,BorderLayout.NORTH);
         container.add(panel,BorderLayout.NORTH);
         container.add(panel1,BorderLayout.CENTER);
         container.add(panelBut, BorderLayout.SOUTH);

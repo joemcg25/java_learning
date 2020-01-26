@@ -30,11 +30,13 @@ public class actionClass implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Start")){
-            logic.startGame(false);
-        }else{
-            String item = e.toString();
-            logic.provideMove(item);
+        String userEntry=e.getActionCommand();
+        System.out.println(userEntry);
+        logic.game(userEntry);
+        logic.retScore(false);
+        logic.retScore(true);
+        if(userEntry.toLowerCase().equals("quit")){
+            obj.dispose();
         }
     }
 }
